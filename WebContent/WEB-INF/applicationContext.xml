@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context" 
+        xmlns:tx="http://www.springframework.org/schema/tx" 
+        xmlns:b="http://www.springframework.org/schema/beans"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+ 
+		http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.0.xsd 
+        
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+        
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+	<context:component-scan base-package="br.com.dimb.inforural"/>
+	<context:spring-configured/>
+	
+    <http auto-config="true" >
+    	<intercept-url pattern="/pages/**" access="ROLE_USER" />
+    	<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <form-login login-page="/login.zul" authentication-failure-url="/login.zul?erro=true" default-target-url="/pages/geral/manegerVacina.zul"/>
+        <logout logout-success-url="/index.zul"/>
+    </http>
+ <!--
+    Usernames/Passwords are
+        rod/koala
+        dianne/emu
+        scott/wombat
+        peter/opal
+    -->
+    <authentication-manager>
+       <authentication-provider>
+        <password-encoder hash="md5" />
+        <jdbc-user-service  data-source-ref="dataSource"
+               users-by-username-query="SELECT nome as username,senha as password,abilitado as enable FROM usuario WHERE nome=?"
+               authorities-by-username-query="SELECT user.nome as username, role.role as authority
+               FROM estudo.usuario user INNER JOIN estudo.usuario_tem_permissao perm ON user.id=perm.usuario
+               INNER JOIN estudo.permissao role ON role.id=perm.permissao WHERE user.nome=?"
+         />
+        <!--  <user-service>
+            <user name="rod" password="a564de63c2d0da68cf47586ee05984d7"
+                authorities="ROLE_SUPERVISOR, ROLE_USER, ROLE_TELLER" />
+            <user name="dianne" password="65d15fe9156f9c4bbffd98085992a44e"
+                authorities="ROLE_USER,ROLE_TELLER" />
+            <user name="scott" password="2b58af6dddbd072ed27ffc86725d7d3a"
+                authorities="ROLE_USER" />
+            <user name="peter" password="22b5c9accc6e1ba628cedc63a72d57f8"
+                authorities="ROLE_USER" />
+        </user-service>-->
+    	</authentication-provider>
+    </authentication-manager>
+ <!-- faz a conexão como banco -->
+    <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <b:property name="url" value="jdbc:mysql://localhost:3306/estudo" />
+        <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <b:property name="username" value="root" />
+        <b:property name="password" value="jbs1968" />
+    </b:bean>
+   <!-- cria a fabrica de sessões como hibernate --> 
+    <b:bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <b:property name="dataSource" ><b:ref local="dataSource"/></b:property>
+       <b:property name="annotatedClasses">
+             <b:list>
+                <b:value>br.com.dimb.inforural.business.Animal</b:value>
+                <b:value>br.com.dimb.inforural.business.AnimalTemVacina</b:value>
+                <b:value>br.com.dimb.inforural.business.AnimalTemVacinaPK</b:value>
+                <b:value>br.com.dimb.inforural.business.Cor</b:value>
+                <b:value>br.com.dimb.inforural.business.Foto</b:value>
+                <b:value>br.com.dimb.inforural.business.Genero</b:value>
+                <b:value>br.com.dimb.inforural.business.Permissao</b:value>
+                <b:value>br.com.dimb.inforural.business.Situacao</b:value>
+                <b:value>br.com.dimb.inforural.business.TipoAnimal</b:value>
+                <b:value>br.com.dimb.inforural.business.Usuario</b:value>
+                <b:value>br.com.dimb.inforural.business.Vacina</b:value>
+            </b:list>
+        </b:property>
+        <b:property name="hibernateProperties">
+            <b:props>
+                <b:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</b:prop>
+                <b:prop key="hibernate.show_sql">true</b:prop>
+            </b:props>
+        </b:property>
+    </b:bean>
+ <!-- injeta dependencia no spring -->
+    <b:bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <b:property name="sessionFactory" > <b:ref local="sessionFactory"/></b:property>
+    </b:bean>
+    
+    <b:bean id="transactionManager"  
+      class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
+      <b:property name="sessionFactory">  
+         <b:ref local="sessionFactory" />  
+      </b:property>  
+   </b:bean>  
+   <tx:annotation-driven transaction-manager="transactionManager" />  
+  <!--
+    <b:bean id="banco_dados" class="org.me.dao.GenericDao">
+        <b:property name="hibernateTemplate" ><b:ref local="hibernateTemplate"/></b:property>
+    </b:bean> -->
+    
+</b:beans>

@@ -1,0 +1,10 @@
+<div align="center">
+<window width="90%" title="Sessão Terminada" height="100px" border="normal">
+	<hbox>
+A página requisitada exige que o usuário esteja conectado. Para continuar, por favor,
+faça o login novamente <a href="login.zul">aqui</a>!
+
+	</hbox><html><![CDATA[ <br> ]]></html>
+	<button label="Login" href="Login.zul" />
+</window>
+</div>

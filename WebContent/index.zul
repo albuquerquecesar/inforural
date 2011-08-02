@@ -1,0 +1,8 @@
+<?page title="Auto Generated index.zul"?>
+<zk >
+<div align="right" apply="br.com.dimb.inforural.controller.Index">
+<menubar height="30px" left="true" width="100%" >
+	<menuitem label="Login" id="menItemLogin" />
+</menubar>
+</div>
+</zk>

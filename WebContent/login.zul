@@ -1,0 +1,27 @@
+<window id="loginwin" title="Login" border="normal" width="500px" mode="modal">
+    <!-- this form-login-page form is also used as the
+         form-error-page to ask for a login again. -->
+    <html style="color:red" if="${not empty param.erro}">
+      <![CDATA[
+        Erro no login, tente novamente.<br/>
+       ]]>
+    </html>
+ 
+    <h:form id="f" name="f" action="j_spring_security_check" method="POST"
+    xmlns:h="native">
+        <grid>
+        	<columns>
+        		<column width="100px"></column>
+        		<column></column>
+        	</columns>
+            <rows>
+                <row>Usuário: <textbox id="u" name="j_username"/></row>
+                <row>Senha: <textbox id="p" type="password" name="j_password"/></row>
+                <row><checkbox id="r" name="j_spring_security_remember_me" checked="true"/>Não peça miha senha por duas semanas.</row>
+                <row ><label></label> 
+                        <h:input type="submit" value="Entrar" align="right"/>
+                </row>
+            </rows>
+        </grid>
+    </h:form>
+</window>
