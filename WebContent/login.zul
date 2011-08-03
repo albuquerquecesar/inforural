@@ -1,3 +1,6 @@
+<zk >
+<style src="style/default.css">
+</style>
 <window id="loginwin" title="Login" border="normal" width="500px" mode="modal">
     <!-- this form-login-page form is also used as the
          form-error-page to ask for a login again. -->
@@ -9,19 +12,20 @@
  
     <h:form id="f" name="f" action="j_spring_security_check" method="POST"
     xmlns:h="native">
-        <grid>
+        <grid style="font-size:18pt;">
         	<columns>
         		<column width="100px"></column>
         		<column></column>
         	</columns>
             <rows>
-                <row>Usuário: <textbox id="u" name="j_username"/></row>
-                <row>Senha: <textbox id="p" type="password" name="j_password"/></row>
-                <row><checkbox id="r" name="j_spring_security_remember_me" checked="true"/>Não peça miha senha por duas semanas.</row>
-                <row ><label></label> 
-                        <h:input type="submit" value="Entrar" align="right"/>
+                <row>Usuário: <textbox id="u" name="j_username" style="font-size:18pt;"/></row>
+                <row>Senha: <textbox id="p" type="password" name="j_password" style="font-size:18pt;"/></row>
+                <row><checkbox id="r" name="j_spring_security_remember_me" checked="true"/>Não peça minha senha por duas semanas.</row>
+                <row ><label/>
+                        <h:input type="submit" value="Entrar" align="right" src="images/login.png" style="font-size:18pt;"/>
                 </row>
             </rows>
         </grid>
     </h:form>
 </window>
+</zk>

@@ -75,25 +75,25 @@ public abstract class ManegerBase extends GenericForwardComposer{
 	public void defineState(Integer state){
 		switch(state){
 		case ManegerBase.EDITION:
-			this.getBtnSalvar().setDisabled(true);
+			this.getBtnSalvar().setDisabled(false);
 			this.getBtnCancelar().setDisabled(false);
 			this.getBtnNovo().setDisabled(true);
-			this.getBtnEditar().setDisabled(false);
+			this.getBtnEditar().setDisabled(true);
 			this.setState(ManegerBase.EDITION);
 			break;
 		case ManegerBase.BROWSER:
 			this.getBtnSalvar().setDisabled(true);
-			this.getBtnCancelar().setDisabled(false);
-			this.getBtnNovo().setDisabled(true);
+			this.getBtnCancelar().setDisabled(true);
+			this.getBtnNovo().setDisabled(false);
 			this.getBtnEditar().setDisabled(false);
 			this.setState(ManegerBase.BROWSER);
 			this.setSelectedItem(null);
 			break;
 		case ManegerBase.INSERTION:
-			this.getBtnSalvar().setDisabled(true);
+			this.getBtnSalvar().setDisabled(false);
 			this.getBtnCancelar().setDisabled(false);
 			this.getBtnNovo().setDisabled(true);
-			this.getBtnEditar().setDisabled(false);
+			this.getBtnEditar().setDisabled(true);
 			this.setState(ManegerBase.INSERTION);
 			break;
 				
@@ -119,11 +119,11 @@ public abstract class ManegerBase extends GenericForwardComposer{
 			if(this.getState()==ManegerBase.this.INSERTION){
 				this.setSelectedItem(this.getBaseService().save(this.getSelectedItem()));
     			this.getListBase().add(this.getSelectedItem());
-    			this.setState(ManegerBase.BROWSER);
+    			this.defineState(ManegerBase.BROWSER);
 			}
 			else if(this.getState()==ManegerBase.this.EDITION){
-				this.getBaseService().update(this.getController());
-				this.setState(ManegerBase.BROWSER);
+				this.getBaseService().update(this.getSelectedItem());
+				this.defineState(ManegerBase.BROWSER);
 			}
     	}
     }
@@ -131,7 +131,7 @@ public abstract class ManegerBase extends GenericForwardComposer{
     public void onAtulizar() {
     	if(this.getSelectedItem()!=null){
     		if(this.getListBase().size()>0){
-        		this.setState(ManegerBase.EDITION);
+        		this.defineState(ManegerBase.EDITION);
 			}
     	}
     }
@@ -139,7 +139,7 @@ public abstract class ManegerBase extends GenericForwardComposer{
     public void onNovo(Object bean) {
     	this.getListbox().setSelectedIndex(-1);
     	this.setSelectedItem(bean);
-    	this.setState(ManegerBase.INSERTION);
+    	this.defineState(ManegerBase.INSERTION);
     	this.getPaging().setTotalSize(this.getPaging().getTotalSize()+1);
     }
     
@@ -147,7 +147,7 @@ public abstract class ManegerBase extends GenericForwardComposer{
     	if(this.getState()==ManegerBase.INSERTION){
     		this.setSelectedItem(null);
     	}
-    	this.setState(ManegerBase.BROWSER);
+    	this.defineState(ManegerBase.BROWSER);
     }
     
     public void onSelecaoListbox(){

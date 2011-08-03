@@ -1,30 +1,35 @@
 <?page title="Meus eventos" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
-<window id="win" title="To do list" width="640px" border="normal"
+<window id="win" title="Gerenciamento de Vacinas" width="640px" border="normal" mode="modal"
 apply="br.com.dimb.inforural.controller.ManegerVacinaController" >
+<div align="center">
+<hbox>
+
+		<button id="novo" label="Novo" image="/images/new.png" style="font-size:15pt"/>
+        <button id="salvar" label="Salvar" image="/images/save.png" style="font-size:15pt"/>
+        <button id="editar" label="Editar" image="/images/refresh.png" style="font-size:15pt"/>
+        <button id="cancelar"  label="Cancelar" image="/images/stop.png" style="font-size:15pt"/>
+</hbox>
+</div>
+<separator/>
+<groupbox>
+        <caption label="Detalhes" />
+        Nome: <textbox id="name" cols="25" constraint="no empty" value="@{win$composer.cur.nome, save-when='salvar.onClick', load-after='novo.onClick,box.onSelect,cancelar.onClick'}" />
+    	Idade permitida/meses: <intbox constraint="no empty, no negative" value="@{win$composer.cur.idadePermitida, save-when='salvar.onClick', load-after='novo.onClick,box.onSelect,cancelar.onClick'}"/> 
+</groupbox>
+<separator/>    	 
     <listbox id="box"   multiple="false" 
-     model="@{win$composer.ListVacina, load-after='add.onClick, update.onClick,paging.onPaging'}"
+     model="@{win$composer.ListVacina, load-after='salvar.onClick, paging.onPaging'}"
      selectedItem="@{win$composer.cur}" >
         <listhead>
-            <listheader label="Item" />
-            <listheader label="Priority" width="80px"  />
-            <listheader label="Date" width="170px"  />
+            <listheader label="Vacina" />
+            <listheader label="Idade Permitida/meses" width="170px"  />
         </listhead>      
-        <listitem self="@{each='event'}" value="@{event}">           
-            <listcell label="@{event.nome}" />
-            <listcell label="@{event.id}" />
-            <listcell label="@{event.idadePermitida}" />
+        <listitem self="@{each='vacina'}" value="@{vacina}">           
+            <listcell label="@{vacina.nome}" />
+            <listcell label="@{vacina.idadePermitida}" />
         </listitem>
     </listbox>
-    <paging id="paging" pageSize="1" />
-    <groupbox>
-        <caption label="Event" />
-        Nome: <textbox id="name" cols="25" constraint="no empty" value="@{win$composer.cur.nome, save-when='add.onClick, update.onClick', load-after='novo.onClick,box.onSelect'}" />
-    	Idade permitida: <datebox value="@{win$composer.cur.idadePermitida, save-when='add.onClick, update.onClick', load-after='novo.onClick,box.onSelect'}"/> 
-    	<button id="novo" label="Novo" />
-        <button id="add" label="Salvar" />
-        <button id="update" label="Atualizar" />
-        <button id="cancel" label="Cancelar" />
-    </groupbox>  
+    <paging id="paging" pageSize="15" />    
 </window>

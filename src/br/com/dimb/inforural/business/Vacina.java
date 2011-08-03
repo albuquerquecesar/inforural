@@ -44,8 +44,7 @@ public class Vacina implements Serializable {
     @Column(name = "nome", length = 50)
     private String nome;
     @Column(name = "idade_permitida")
-    @Temporal(TemporalType.DATE)
-    private Date idadePermitida;
+    private Integer idadePermitida;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vacina1", fetch = FetchType.LAZY)
     private List<AnimalTemVacina> animalTemVacinaList;
 
@@ -56,7 +55,7 @@ public class Vacina implements Serializable {
         this.id = id;
     }
 
-    public Vacina(int i, String string, Date date) {
+    public Vacina(int i, String string, Integer date) {
 		this.id=i;
 		this.nome=string;
 		this.idadePermitida=date;
@@ -78,11 +77,11 @@ public class Vacina implements Serializable {
         this.nome = nome;
     }
 
-    public Date getIdadePermitida() {
+    public Integer getIdadePermitida() {
         return idadePermitida;
     }
 
-    public void setIdadePermitida(Date idadePermitida) {
+    public void setIdadePermitida(Integer idadePermitida) {
         this.idadePermitida = idadePermitida;
     }
 
@@ -116,7 +115,7 @@ public class Vacina implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.dimb.inforural.business.Vacina[id=" + id + "]";
+        return this.nome;
     }
 
 }

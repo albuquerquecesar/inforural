@@ -41,16 +41,17 @@ public class ManegerVacinaController extends ManegerBase{
 	private List<Vacina> listVacina;
 	private Listbox box;
 	private Paging paging;
-	private Button add;
+	private Button salvar;
 	private Button novo;
-	private Button update;
-	private Button cancel;
+	private Button editar;
+	private Button cancelar;
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
 		// TODO Auto-generated method stub
 		super.doAfterCompose(comp);
 		this.iniciarPaginacao();
+		System.out.println("Criou controlador");
 		/*this.calcularPaginacao(this.paging, this.vacinaService);
 		//adiciona paginação
 		this.paging.addEventListener("onPaging", new EventListener() {
@@ -69,7 +70,7 @@ public class ManegerVacinaController extends ManegerBase{
 		
 	}
 
-	public void onClick$add() {
+	public void onClick$salvar() {
 		/*if(this.getCur()!=null){
     		this.setCur(this.vacinaService.save(this.getCur()));
     		this.getListVacina().add(this.getCur());
@@ -78,7 +79,7 @@ public class ManegerVacinaController extends ManegerBase{
 		this.onSalvar();
     }
  
-    public void onClick$update() {
+    public void onClick$editar() {
     	/*if(this.getCur()!=null){
     		this.vacinaService.update(this.getCur());
     		this.setState(ManegerVacinaController.BROWSER);
@@ -94,7 +95,7 @@ public class ManegerVacinaController extends ManegerBase{
     	this.onNovo(new Vacina());
     }
     
-    public void onClick$cancel(){
+    public void onClick$cancelar(){
     	/*if(this.getState()==ManegerVacinaController.INSERTION){
     		this.cur=null;
     	}
@@ -143,12 +144,12 @@ public class ManegerVacinaController extends ManegerBase{
 
 	@Override
 	public Button getBtnCancelar() {
-		return this.cancel;
+		return this.cancelar;
 	}
 
 	@Override
-	public Button getBtnEditar() {
-		return this.update;
+	public Button getBtnEditar(){
+		return this.editar;
 	}
 
 	@Override
@@ -158,7 +159,7 @@ public class ManegerVacinaController extends ManegerBase{
 
 	@Override
 	public Button getBtnSalvar() {
-		return this.add;
+		return this.salvar;
 	}
 
 	@Override

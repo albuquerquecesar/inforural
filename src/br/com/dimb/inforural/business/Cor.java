@@ -94,7 +94,7 @@ public class Cor implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.dimb.inforural.business.Cor[id=" + id + "]";
+        return this.nome;
     }
 
 }

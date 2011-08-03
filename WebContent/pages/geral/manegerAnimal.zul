@@ -1,6 +1,38 @@
-<?page title="manegerAnimal" contentType="text/html;charset=UTF-8"?>
-<zk>
-<window title="manegerAnimal" border="normal">
-New Content Here!
+<?page title="Meus eventos" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
+<window id="win" title="Gerenciamento de Vacinas" width="640px" border="normal" 
+apply="br.com.dimb.inforural.controller.ManegerAnimalController" >
+<div align="center">
+<hbox>
+
+		<button id="novo" label="Novo" image="/images/new.png" style="font-size:15pt"/>
+        <button id="salvar" label="Salvar" image="/images/save.png" style="font-size:15pt"/>
+        <button id="editar" label="Editar" image="/images/refresh.png" style="font-size:15pt"/>
+        <button id="cancelar"  label="Cancelar" image="/images/stop.png" style="font-size:15pt"/>
+</hbox>
+</div>
+<separator/>
+<groupbox>
+        <caption label="Detalhes" />
+        Nome: <textbox id="name" cols="25" constraint="no empty" value="@{win$composer.cur.apelido, save-when='salvar.onClick', load-after='novo.onClick,box.onSelect,cancelar.onClick'}" />
+    	
+	Cor: <listbox mold="select" model="@{win$composer.listCor }">
+		<listitem self="@{each='cor'} " value="@{cor }">
+				<listcell label="@{cor.nome}"/>
+		</listitem>
+	</listbox> 
+</groupbox>
+<separator/>    	 
+    <listbox id="box"   multiple="false" 
+     model="@{win$composer.ListAnimal, load-after='salvar.onClick, paging.onPaging'}"
+     selectedItem="@{win$composer.cur}" >
+        <listhead>
+            <listheader label="Apelido" />
+        </listhead>      
+        <listitem self="@{each='animal'}" value="@{animal}">           
+            <listcell label="@{animal.apelido}" />
+        </listitem>
+    </listbox>
+    <paging id="paging" pageSize="15" />    
 </window>
-</zk>
