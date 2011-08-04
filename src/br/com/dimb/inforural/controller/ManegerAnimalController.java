@@ -1,19 +1,24 @@
 package br.com.dimb.inforural.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Paging;
 
 import br.com.dimb.inforural.business.Animal;
 import br.com.dimb.inforural.business.Cor;
-import br.com.dimb.inforural.business.Vacina;
+import br.com.dimb.inforural.business.Genero;
+import br.com.dimb.inforural.business.Situacao;
 import br.com.dimb.inforural.services.AnimalService;
 import br.com.dimb.inforural.services.CorService;
+import br.com.dimb.inforural.services.GeneroService;
 import br.com.dimb.inforural.services.IBaseService;
+import br.com.dimb.inforural.services.SituacaoService;
 
 public class ManegerAnimalController extends ManegerBase {
 	
@@ -27,16 +32,30 @@ public class ManegerAnimalController extends ManegerBase {
 	private Button novo;
 	private Paging paging;
 	private Listbox box;
+	private Combobox comboGenero;
+	private Combobox comboSituacao;
+	private Combobox comboCor;
 	
 	private AnimalService animalService;
 	private CorService corService;
-	private List<Animal> listAnimal;
+	private SituacaoService situacaoService;
+	private GeneroService generoService;
+	private List<Animal> listAnimal= new ArrayList<Animal>();
 	private List<Cor> listCor;
-	private Animal cur;
+	private List<Situacao> listSituacao;
+	private List<Genero>   listGenero;
+	private Animal currentAnimal;
 	
 	public void doAfterCompose(Component comp) throws Exception{
 		super.doAfterCompose(comp);
+		this.iniciarPaginacao();
+		this.init();
+	}
+	
+	private void init(){
 		this.listCor=corService.findAll();
+		this.listGenero=this.generoService.findAll();
+		this.listSituacao=this.situacaoService.findAll();
 	}
 	
 	public void onClick$salvar() {
@@ -122,7 +141,7 @@ public class ManegerAnimalController extends ManegerBase {
 
 	@Override
 	public Object getSelectedItem() {
-		return this.getCur();
+		return this.getCurrentAnimal();
 	}
 
 	@Override
@@ -133,7 +152,7 @@ public class ManegerAnimalController extends ManegerBase {
 
 	@Override
 	public void setSelectedItem(Object item) {
-		this.setCur((Animal)item);
+		this.setCurrentAnimal((Animal)item);
 		
 	}
 	@Autowired
@@ -170,12 +189,38 @@ public class ManegerAnimalController extends ManegerBase {
 		return listAnimal;
 	}
 
-	public void setCur(Animal cur) {
-		this.cur = cur;
+	public List<Situacao> getListSituacao() {
+		return listSituacao;
 	}
 
-	public Animal getCur() {
-		return cur;
+	public void setListSituacao(List<Situacao> listSituacao) {
+		this.listSituacao = listSituacao;
+	}
+
+	public List<Genero> getListGenero() {
+		return listGenero;
+	}
+
+	public void setListGenero(List<Genero> listGenero) {
+		this.listGenero = listGenero;
+	}
+	
+	@Autowired
+	public void setSituacaoService(SituacaoService situacaoService) {
+		this.situacaoService = situacaoService;
+	}
+	
+	@Autowired
+	public void setGeneroService(GeneroService generoService) {
+		this.generoService = generoService;
+	}
+
+	public void setCurrentAnimal(Animal currentAnimal) {
+		this.currentAnimal = currentAnimal;
+	}
+
+	public Animal getCurrentAnimal() {
+		return currentAnimal;
 	}
 
 }

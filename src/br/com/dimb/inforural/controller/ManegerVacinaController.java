@@ -1,31 +1,19 @@
 package br.com.dimb.inforural.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 
-import org.python.modules.math;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Paging;
-import org.zkoss.zul.Window;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import br.com.dimb.inforural.business.Vacina;
 import br.com.dimb.inforural.services.IBaseService;
 import br.com.dimb.inforural.services.VacinaService;
-import br.com.dimb.inforural.util.RowBounds;
-import bsh.This;
 
 public class ManegerVacinaController extends ManegerBase{
 
@@ -38,7 +26,7 @@ public class ManegerVacinaController extends ManegerBase{
 	private static final int INSERTION=2;*/
 	private Vacina cur;
 	private VacinaService vacinaService;
-	private List<Vacina> listVacina;
+	private List<Vacina> listVacina=new ArrayList<Vacina>();
 	private Listbox box;
 	private Paging paging;
 	private Button salvar;

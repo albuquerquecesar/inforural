@@ -1,8 +1,58 @@
 <?page title="Meus eventos" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
-<window id="win" title="Gerenciamento de Vacinas" width="640px" border="normal" 
+<window id="win" title="Gerenciamento de Animais" width="600px" border="normal" 
 apply="br.com.dimb.inforural.controller.ManegerAnimalController" >
+
+<grid>
+		<auxhead>
+			<auxheader label="Detalhes" colspan="2"/> 
+		</auxhead>
+		<columns>
+			<column width="150px"/>
+			<column />
+		</columns>
+		<rows>
+			<row>
+				Apelido:<textbox value="@{win$composer.currentAnimal.apelido}" width="430px" maxlength="50"/>
+			</row>
+			<row>
+				Descrição:<textbox value="@{win$composer.currentAnimal.descricao}" constraint="no empty" rows="3" maxlength="255" width="430px"/>
+			</row>
+			<row>
+				Data de nascimento:<datebox  value="@{win$composer.currentAnimal.dataNascimento}" />
+			</row>
+			<row>
+				Data de aquisição:<datebox value="@{win$composer.currentAnimal.dataAquisicao}" />
+			</row>
+			<row>
+				Cor:<combobox id="comboCor" width="420px" readonly="true" model="@{win$composer.listCor}" 
+					selectedItem="@{win$composer.currentAnimal.cor}">
+					<comboitem self="@{each='cor'}" value="@{cor}" label="@{cor.nome}"/>
+				</combobox>
+			</row>
+			<row>
+				Sexo:<combobox readonly="true" id="comboGenero" width="420px"  model="@{win$composer.listGenero }" 
+					selectedItem="@{win$composer.currentAnimal.sexo}">
+					<comboitem self="@{each='genero'}" value="@{genero}" label="@{genero.descricao}"/>
+				</combobox >
+			</row>
+			<row>
+				Situação:<combobox  id="comboSituacao" width="420px" readonly="true" 
+							model="@{win$composer.listSituacao}"
+							selectedItem="@{win$composer.currentAnimal.situacao}" >
+							<comboitem self="@{each='situacao'}" value="@{situacao}" 
+							label="@{situacao.descricao}"/>
+						</combobox>
+			</row>
+			<row>
+				Observação:<textbox value="@{win$composer.currentAnimal.obs}" rows="3" maxlength="200" width="430px"/>
+			</row>
+		</rows>
+</grid>
+
+<separator/> 
+
 <div align="center">
 <hbox>
 
@@ -12,21 +62,12 @@ apply="br.com.dimb.inforural.controller.ManegerAnimalController" >
         <button id="cancelar"  label="Cancelar" image="/images/stop.png" style="font-size:15pt"/>
 </hbox>
 </div>
-<separator/>
-<groupbox>
-        <caption label="Detalhes" />
-        Nome: <textbox id="name" cols="25" constraint="no empty" value="@{win$composer.cur.apelido, save-when='salvar.onClick', load-after='novo.onClick,box.onSelect,cancelar.onClick'}" />
-    	
-	Cor: <listbox mold="select" model="@{win$composer.listCor }">
-		<listitem self="@{each='cor'} " value="@{cor }">
-				<listcell label="@{cor.nome}"/>
-		</listitem>
-	</listbox> 
-</groupbox>
+
+
 <separator/>    	 
     <listbox id="box"   multiple="false" 
      model="@{win$composer.ListAnimal, load-after='salvar.onClick, paging.onPaging'}"
-     selectedItem="@{win$composer.cur}" >
+     selectedItem="@{win$composer.currentAnimal}" >
         <listhead>
             <listheader label="Apelido" />
         </listhead>      

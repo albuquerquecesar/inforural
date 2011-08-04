@@ -36,7 +36,6 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Animal.findById", query = "SELECT a FROM Animal a WHERE a.id = :id"),
     @NamedQuery(name = "Animal.findByApelido", query = "SELECT a FROM Animal a WHERE a.apelido = :apelido"),
     @NamedQuery(name = "Animal.findByDescricao", query = "SELECT a FROM Animal a WHERE a.descricao = :descricao"),
-    @NamedQuery(name = "Animal.findByDataCruzamento", query = "SELECT a FROM Animal a WHERE a.dataCruzamento = :dataCruzamento"),
     @NamedQuery(name = "Animal.findByDataNascimento", query = "SELECT a FROM Animal a WHERE a.dataNascimento = :dataNascimento"),
     @NamedQuery(name = "Animal.findByDataAquisicao", query = "SELECT a FROM Animal a WHERE a.dataAquisicao = :dataAquisicao"),
     @NamedQuery(name = "Animal.findByObs", query = "SELECT a FROM Animal a WHERE a.obs = :obs")})
@@ -51,9 +50,6 @@ public class Animal implements Serializable {
     private String apelido;
     @Column(name = "descricao", length = 255)
     private String descricao;
-    @Column(name = "data_cruzamento")
-    @Temporal(TemporalType.DATE)
-    private Date dataCruzamento;
     @Column(name = "data_nascimento")
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
@@ -67,13 +63,13 @@ public class Animal implements Serializable {
     @OneToMany(mappedBy = "animal", fetch = FetchType.LAZY)
     private List<Foto> fotoList;
     @JoinColumn(name = "sexo", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Genero sexo;
     @JoinColumn(name = "cor", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Cor cor;
     @JoinColumn(name = "situacao", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Situacao situacao;
 
     public Animal() {
@@ -107,15 +103,7 @@ public class Animal implements Serializable {
         this.descricao = descricao;
     }
 
-    public Date getDataCruzamento() {
-        return dataCruzamento;
-    }
-
-    public void setDataCruzamento(Date dataCruzamento) {
-        this.dataCruzamento = dataCruzamento;
-    }
-
-    public Date getDataNascimento() {
+    public java.util.Date getDataNascimento() {
         return dataNascimento;
     }
 
@@ -123,7 +111,7 @@ public class Animal implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public Date getDataAquisicao() {
+    public java.util.Date getDataAquisicao() {
         return dataAquisicao;
     }
 
