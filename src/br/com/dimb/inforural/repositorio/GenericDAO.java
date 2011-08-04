@@ -27,6 +27,8 @@ public interface GenericDAO<T,ID extends Serializable>{
 	public T getId(ID id);
 
 	public T save(T entity);
+	
+	public void saveOrUpdateAll(List<T> entity);
 
 	public void update(T entity);
 	

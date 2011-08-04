@@ -8,7 +8,7 @@ import org.jfree.data.Range;
 import br.com.dimb.inforural.repositorio.GenericDAO;
 import br.com.dimb.inforural.util.RowBounds;
 
-public abstract class BaseService <T,ID extends Serializable> 
+public class BaseService <T,ID extends Serializable> 
 implements IBaseService<T,ID>{
 	
 	private GenericDAO genericDAO;
@@ -62,6 +62,12 @@ implements IBaseService<T,ID>{
 	
 	public Long countRows(){
 		return this.genericDAO.countRows();
+	}
+
+	@Override
+	public void saveOrUpdateAll(List<T> entity) {
+		this.genericDAO.saveOrUpdateAll(entity);
+		
 	}
 
 }

@@ -14,39 +14,43 @@ apply="br.com.dimb.inforural.controller.ManegerAnimalController" >
 		</columns>
 		<rows>
 			<row>
-				Apelido:<textbox  mold="rounded" value="@{win$composer.currentAnimal.apelido}" width="430px" maxlength="50"/>
+				Apelido:<textbox  mold="rounded" 
+						value="@{win$composer.currentAnimal.apelido, load-after='novo.onClick,box.onSelect,cancelar.onClick'}" width="430px" maxlength="50"/>
 			</row>
 			<row>
-				Descrição:<textbox mold="rounded" value="@{win$composer.currentAnimal.descricao}" constraint="no empty" rows="3" maxlength="255" width="430px"/>
+				Descrição:<textbox mold="rounded" 
+						value="@{win$composer.currentAnimal.descricao, load-after='novo.onClick,box.onSelect,cancelar.onClick'}" constraint="no empty" rows="3" maxlength="255" width="430px"/>
 			</row>
 			<row>
-				Data de nascimento:<datebox  mold="rounded" value="@{win$composer.currentAnimal.dataNascimento}" />
+				Data de nascimento:<datebox  mold="rounded" 
+								value="@{win$composer.currentAnimal.dataNascimento, load-after='novo.onClick,box.onSelect,cancelar.onClick'}" />
 			</row>
 			<row>
-				Data de aquisição:<datebox mold="rounded" value="@{win$composer.currentAnimal.dataAquisicao}" />
+				Data de aquisição:<datebox mold="rounded" 
+								value="@{win$composer.currentAnimal.dataAquisicao, load-after='novo.onClick,box.onSelect,cancelar.onClick'}" />
 			</row>
 			<row>
-				Cor:<combobox mold="rounded" id="comboCor" width="420px" readonly="true" model="@{win$composer.listCor}" 
+				Cor:<combobox mold="rounded" id="comboCor" width="420px" readonly="true" model="@{win$composer.listCor, load-after='novo.onClick,box.onSelect,cancelar.onClick'}" 
 					selectedItem="@{win$composer.currentAnimal.cor}">
 					<comboitem self="@{each='cor'}" value="@{cor}" label="@{cor.nome}"/>
 				</combobox>
 			</row>
 			<row>
 				Sexo:<combobox mold="rounded" readonly="true" id="comboGenero" width="420px"  model="@{win$composer.listGenero }" 
-					selectedItem="@{win$composer.currentAnimal.sexo}">
+					selectedItem="@{win$composer.currentAnimal.sexo, load-after='novo.onClick,box.onSelect,cancelar.onClick'}">
 					<comboitem self="@{each='genero'}" value="@{genero}" label="@{genero.descricao}"/>
 				</combobox >
 			</row>
 			<row>
 				Situação:<combobox  mold="rounded" id="comboSituacao" width="420px" readonly="true" 
-							model="@{win$composer.listSituacao}"
+							model="@{win$composer.listSituacao, load-after='novo.onClick,box.onSelect,cancelar.onClick'}"
 							selectedItem="@{win$composer.currentAnimal.situacao}" >
 							<comboitem self="@{each='situacao'}" value="@{situacao}" 
 							label="@{situacao.descricao}"/>
 						</combobox>
 			</row>
 			<row>
-				Observação:<textbox value="@{win$composer.currentAnimal.obs}" rows="3" maxlength="200" width="430px"/>
+				Observação:<textbox value="@{win$composer.currentAnimal.obs, load-after='novo.onClick,box.onSelect,cancelar.onClick'}" rows="3" maxlength="200" width="430px"/>
 			</row>
 		</rows>
 </grid>

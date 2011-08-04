@@ -133,5 +133,10 @@ public abstract class GenericDAOImp<T,ID extends Serializable> implements Generi
 		return this.getHibernateTemplate().getSessionFactory().getCurrentSession();
 	}
 
+	@Override
+	public void saveOrUpdateAll(List<T> entity) {
+		this.hibernateTemplate.saveOrUpdateAll(entity);
+	}
+
 	
 }

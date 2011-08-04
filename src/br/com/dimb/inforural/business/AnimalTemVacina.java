@@ -41,10 +41,10 @@ public class AnimalTemVacina implements Serializable {
     @Column(name = "lugar", length = 50)
     private String lugar;
     @JoinColumn(name = "animal", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Animal animal1;
     @JoinColumn(name = "vacina", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Vacina vacina1;
 
     public AnimalTemVacina() {

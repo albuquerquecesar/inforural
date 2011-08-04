@@ -1,0 +1,26 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
+<zk>
+<window title="new page title" border="normal">
+<hbox>
+	Pesquisa:<textbox id="txtPesquisar"/>
+	<button id="btnPesquisar" label="Pesquisar" />
+</hbox>
+<listbox >
+	<auxhead>
+		<auxheader label="Selecione os animais que deseja adicionar a vacina" colspan="3"/> 
+	</auxhead>
+	<listhead>
+		<listheader label=""  width="35px"/>
+		<listheader label="Código" sort="auto" width="70px"/>
+		<listheader label="Apelido" sort="auto" />
+	</listhead>
+	<listitem>
+	<listcell><checkbox checked="true"/></listcell>
+		<listcell label="gerg" />
+		<listcell label="ger" />
+	</listitem>
+</listbox>
+
+</window>
+</zk>
