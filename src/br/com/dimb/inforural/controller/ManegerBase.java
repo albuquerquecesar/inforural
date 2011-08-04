@@ -120,6 +120,7 @@ public abstract class ManegerBase extends GenericForwardComposer{
 				this.setSelectedItem(this.getBaseService().save(this.getSelectedItem()));
     			this.getListBase().add(this.getSelectedItem());
     			this.defineState(ManegerBase.BROWSER);
+    			this.getPaging().setTotalSize(this.getPaging().getTotalSize()+1);
 			}
 			else if(this.getState()==ManegerBase.this.EDITION){
 				this.getBaseService().update(this.getSelectedItem());
@@ -137,10 +138,9 @@ public abstract class ManegerBase extends GenericForwardComposer{
     }
     
     public void onNovo(Object bean) {
-    	this.getListbox().setSelectedIndex(-1);
     	this.setSelectedItem(bean);
+    	this.getListbox().setSelectedIndex(-1);
     	this.defineState(ManegerBase.INSERTION);
-    	this.getPaging().setTotalSize(this.getPaging().getTotalSize()+1);
     }
     
     public void onCancelar(){

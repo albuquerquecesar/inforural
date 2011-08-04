@@ -4,41 +4,41 @@
 <window id="win" title="Gerenciamento de Animais" width="600px" border="normal" 
 apply="br.com.dimb.inforural.controller.ManegerAnimalController" >
 
-<grid>
+<grid >
 		<auxhead>
 			<auxheader label="Detalhes" colspan="2"/> 
 		</auxhead>
 		<columns>
-			<column width="150px"/>
+			<column width="150px" />
 			<column />
 		</columns>
 		<rows>
 			<row>
-				Apelido:<textbox value="@{win$composer.currentAnimal.apelido}" width="430px" maxlength="50"/>
+				Apelido:<textbox  mold="rounded" value="@{win$composer.currentAnimal.apelido}" width="430px" maxlength="50"/>
 			</row>
 			<row>
-				Descrição:<textbox value="@{win$composer.currentAnimal.descricao}" constraint="no empty" rows="3" maxlength="255" width="430px"/>
+				Descrição:<textbox mold="rounded" value="@{win$composer.currentAnimal.descricao}" constraint="no empty" rows="3" maxlength="255" width="430px"/>
 			</row>
 			<row>
-				Data de nascimento:<datebox  value="@{win$composer.currentAnimal.dataNascimento}" />
+				Data de nascimento:<datebox  mold="rounded" value="@{win$composer.currentAnimal.dataNascimento}" />
 			</row>
 			<row>
-				Data de aquisição:<datebox value="@{win$composer.currentAnimal.dataAquisicao}" />
+				Data de aquisição:<datebox mold="rounded" value="@{win$composer.currentAnimal.dataAquisicao}" />
 			</row>
 			<row>
-				Cor:<combobox id="comboCor" width="420px" readonly="true" model="@{win$composer.listCor}" 
+				Cor:<combobox mold="rounded" id="comboCor" width="420px" readonly="true" model="@{win$composer.listCor}" 
 					selectedItem="@{win$composer.currentAnimal.cor}">
 					<comboitem self="@{each='cor'}" value="@{cor}" label="@{cor.nome}"/>
 				</combobox>
 			</row>
 			<row>
-				Sexo:<combobox readonly="true" id="comboGenero" width="420px"  model="@{win$composer.listGenero }" 
+				Sexo:<combobox mold="rounded" readonly="true" id="comboGenero" width="420px"  model="@{win$composer.listGenero }" 
 					selectedItem="@{win$composer.currentAnimal.sexo}">
 					<comboitem self="@{each='genero'}" value="@{genero}" label="@{genero.descricao}"/>
 				</combobox >
 			</row>
 			<row>
-				Situação:<combobox  id="comboSituacao" width="420px" readonly="true" 
+				Situação:<combobox  mold="rounded" id="comboSituacao" width="420px" readonly="true" 
 							model="@{win$composer.listSituacao}"
 							selectedItem="@{win$composer.currentAnimal.situacao}" >
 							<comboitem self="@{each='situacao'}" value="@{situacao}" 

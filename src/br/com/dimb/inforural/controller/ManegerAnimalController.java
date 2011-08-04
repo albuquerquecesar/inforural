@@ -141,7 +141,7 @@ public class ManegerAnimalController extends ManegerBase {
 
 	@Override
 	public Object getSelectedItem() {
-		return this.getCurrentAnimal();
+		return this.currentAnimal;
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class ManegerAnimalController extends ManegerBase {
 
 	@Override
 	public void setSelectedItem(Object item) {
-		this.setCurrentAnimal((Animal)item);
+		this.currentAnimal=(Animal)item;
 		
 	}
 	@Autowired
