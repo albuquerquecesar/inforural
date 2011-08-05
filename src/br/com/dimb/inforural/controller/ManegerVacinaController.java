@@ -6,9 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Components;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Paging;
+import org.zkoss.zul.Window;
 
 
 import br.com.dimb.inforural.business.Vacina;
@@ -66,6 +70,12 @@ public class ManegerVacinaController extends ManegerBase{
     	}*/
 		this.onSalvar();
     }
+	
+	public void onClick$btnVacinar() throws SuspendNotAllowedException, InterruptedException{
+		Window w=(Window) Executions.createComponents("/pages/administrator/controleVacina.zul",null,null);
+		w.setClosable(true);
+		w.doModal();
+	}
  
     public void onClick$editar() {
     	/*if(this.getCur()!=null){
