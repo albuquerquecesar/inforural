@@ -3,9 +3,11 @@ package br.com.dimb.inforural.services;
 import java.io.Serializable;
 import java.util.List;
 
+import net.priuli.filter.Filter;
+
 import org.jfree.data.Range;
 
-import br.com.dimb.inforural.repositorio.GenericDAO;
+import br.com.dimb.inforural.repository.GenericDAO;
 import br.com.dimb.inforural.util.RowBounds;
 
 public class BaseService <T,ID extends Serializable> 
@@ -34,13 +36,13 @@ implements IBaseService<T,ID>{
 	}
 
 	@Override
-	public List<T> findAllBy(T entity, RowBounds rowsBound) {
-		return this.genericDAO.findAllBy(entity,rowsBound);
+	public List<T> findAllBy(Filter filter, RowBounds rowsBound) {
+		return this.genericDAO.findAllBy(filter,rowsBound);
 	}
 
 	@Override
-	public List<T> findAllBy(T entity) {
-		return this.genericDAO.findAllBy(entity);
+	public List<T> findAllBy(Filter filter) {
+		return this.genericDAO.findAllBy(filter);
 	}
 
 	@Override

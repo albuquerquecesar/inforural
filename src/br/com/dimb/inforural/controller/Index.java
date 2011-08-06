@@ -9,7 +9,7 @@ import org.zkoss.zkplus.spring.SpringUtil;
 import org.zkoss.zul.Window;
 
 import br.com.dimb.inforural.business.Cor;
-import br.com.dimb.inforural.repositorio.CorDAO;
+import br.com.dimb.inforural.repository.CorDAO;
 import br.com.dimb.inforural.services.AnimalService;
 
 public class Index extends GenericForwardComposer{

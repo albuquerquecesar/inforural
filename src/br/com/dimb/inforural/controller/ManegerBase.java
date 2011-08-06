@@ -11,6 +11,7 @@ import org.zkoss.zul.Paging;
 
 import br.com.dimb.inforural.business.Vacina;
 import br.com.dimb.inforural.services.IBaseService;
+import br.com.dimb.inforural.util.Paginacao;
 import br.com.dimb.inforural.util.RowBounds;
 
 public abstract class ManegerBase extends GenericForwardComposer{
@@ -55,13 +56,13 @@ public abstract class ManegerBase extends GenericForwardComposer{
 	public abstract Listbox getListbox();
 	
 	public void iniciarPaginacao(){
-		this.calcularPaginacao(this.getPaging(), this.getBaseService());
+		Paginacao.calcularPaginacao(this.getPaging(), this.getBaseService());
 		//adiciona paginação
 		this.getPaging().addEventListener("onPaging", new EventListener() {
 			
 			@Override
 			public void onEvent(Event event) throws Exception {
-				setListBase(paginar(
+				setListBase(Paginacao.paginar(
 						getPaging(),
 						getBaseService()));
 			}
@@ -98,20 +99,6 @@ public abstract class ManegerBase extends GenericForwardComposer{
 			break;
 				
 		}
-	}
-	
-
-	public void calcularPaginacao(Paging paging, IBaseService service){
-		Long total=service.countRows();
-		paging.setTotalSize(total.intValue());
-	}
-	
-	public List paginar(Paging paging,IBaseService service){
-		Integer pagina=paging.getActivePage();
-		//pagina-=1;
-		int limit=paging.getPageSize();
-		int offSet=pagina*limit;
-		return service.findAll(new RowBounds(offSet, limit));
 	}
 	
 	public void onSalvar() {

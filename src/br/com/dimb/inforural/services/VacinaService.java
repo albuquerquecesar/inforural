@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import br.com.dimb.inforural.business.Vacina;
-import br.com.dimb.inforural.repositorio.VacinaDAO;
+import br.com.dimb.inforural.repository.VacinaDAO;
 
 @Service
 @Lazy(value=true)

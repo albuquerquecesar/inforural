@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import br.com.dimb.inforural.business.Cor;
-import br.com.dimb.inforural.repositorio.CorDAO;
+import br.com.dimb.inforural.repository.CorDAO;
 
 @Service
 @Lazy(value=true)

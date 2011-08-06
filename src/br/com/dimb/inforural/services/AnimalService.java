@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import br.com.dimb.inforural.business.Animal;
-import br.com.dimb.inforural.repositorio.AnimalDAO;
+import br.com.dimb.inforural.repository.AnimalDAO;
 
 @Service
 @Lazy(value=true)

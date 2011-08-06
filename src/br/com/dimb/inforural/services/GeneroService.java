@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import br.com.dimb.inforural.business.Genero;
-import br.com.dimb.inforural.repositorio.GeneroDAO;
+import br.com.dimb.inforural.repository.GeneroDAO;
 
 @Service
 @Lazy(value=true)

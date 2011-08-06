@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import br.com.dimb.inforural.business.Situacao;
-import br.com.dimb.inforural.repositorio.SituacaoDAO;
+import br.com.dimb.inforural.repository.SituacaoDAO;
 
 @Service
 @Lazy
