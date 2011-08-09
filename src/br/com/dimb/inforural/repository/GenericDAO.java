@@ -15,9 +15,9 @@ public interface GenericDAO<T,ID extends Serializable>{
 
 	public List<T> findAll(RowBounds rowBounds);
 	
-	public List<T> findAllBy(Filter filter,  RowBounds rowBounds);
+	public List<T> findAllBy(final Filter filter,  RowBounds rowBounds);
 	
-	public List<T> findAllBy(Filter filter) ;
+	public List<T> findAllBy(final Filter filter) ;
 
 	public T getId(ID id);
 

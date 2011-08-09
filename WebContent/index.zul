@@ -1,4 +1,5 @@
 <?page title="Auto Generated index.zul"?>
+<?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <zk >
 <div align="right" apply="br.com.dimb.inforural.controller.Index">
 <menubar height="30px" left="true" width="100%" >

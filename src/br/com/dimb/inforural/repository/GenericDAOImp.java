@@ -2,8 +2,6 @@ package br.com.dimb.inforural.repository;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,15 +9,12 @@ import net.priuli.filter.Filter;
 import net.priuli.filter.utils.HibernateUtils;
 
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.dimb.inforural.util.RowBounds;
 
@@ -47,7 +42,6 @@ public abstract class GenericDAOImp<T,ID extends Serializable> implements Generi
 	public GenericDAOImp(){
 		this.persistentClass=(Class<T>) ((ParameterizedType)
 			      getClass().getGenericSuperclass()).getActualTypeArguments()[0]; 
-		System.out.println(this.persistentClass.toString());
 	}
 
 	@Override
@@ -90,26 +84,54 @@ public abstract class GenericDAOImp<T,ID extends Serializable> implements Generi
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAllBy(final Filter filter, RowBounds rowBounds) {
 		return (List<T>)this.getHibernateTemplate().executeFind(new HibernateCallback() {
 
+			@SuppressWarnings("finally")
 			@Override
-			public Object doInHibernate(Session arg0) throws HibernateException{
-				Criteria cri=HibernateUtils.buildCriteria(filter, arg0, GenericDAOImp.this.getClass());
-				return cri.list();
+			public Object doInHibernate(Session arg0){
+				Criteria cri=null;
+				try{
+					if(arg0==null){
+						System.out.println("Sessao esta fudida!");
+					}
+					cri=HibernateUtils.buildCriteria(filter, arg0,getClass());
+				}catch(Exception e){
+					System.out.println("Deu erro no find!");
+				}
+				finally{
+					if(cri!=null)
+					return cri.list();
+					return null;
+				}
 			}
 		});
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findAllBy(final Filter filter) {
 		return (List<T>)this.getHibernateTemplate().executeFind(new HibernateCallback() {
 
+			@SuppressWarnings("finally")
 			@Override
-			public Object doInHibernate(Session arg0) throws HibernateException{
-				Criteria cri=HibernateUtils.buildCriteria(filter, arg0, GenericDAOImp.this.getClass());
-				return cri.list();
+			public Object doInHibernate(Session arg0){
+				Criteria cri=null;
+				try{
+					if(arg0==null){
+						System.out.println("Sessao esta fudida!");
+					}
+					cri=HibernateUtils.buildCriteria(filter, arg0, GenericDAOImp.this.getClass());
+				}catch(Exception e){
+					System.out.println("Deu erro no find!");
+				}
+				finally{
+					if(cri!=null)
+					return cri.list();
+					return null;
+				}
 			}
 		});
 	}
