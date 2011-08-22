@@ -71,6 +71,9 @@ public class Animal implements Serializable {
     @JoinColumn(name = "situacao", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Situacao situacao;
+    @JoinColumn(name = "tipo", referencedColumnName = "id")
+    @ManyToOne
+    private TipoAnimal tipoAnimal;
 
     public Animal() {
     }
@@ -191,5 +194,13 @@ public class Animal implements Serializable {
     public String toString() {
         return "br.com.dimb.inforural.business.Animal[id=" + id + "]";
     }
+
+	public void setTipoAnimal(TipoAnimal tipoAnimal) {
+		this.tipoAnimal = tipoAnimal;
+	}
+
+	public TipoAnimal getTipoAnimal() {
+		return tipoAnimal;
+	}
 
 }

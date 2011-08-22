@@ -1,7 +1,7 @@
-<?page title="Meus eventos" contentType="text/html;charset=UTF-8"?>
+<?page title="Animais" contentType="text/html;charset=UTF-8"?>
 <?variable-resolver class="org.zkoss.zkplus.spring.DelegatingVariableResolver"?>
 <?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
-<window id="win" title="Gerenciamento de Animais" width="600px" border="normal" 
+<window id="win" title="Gerenciamento de Animais" width="620px" border="normal" mode="modal"
 apply="br.com.dimb.inforural.controller.ManegerAnimalController" >
 
 <grid >
@@ -39,6 +39,12 @@ apply="br.com.dimb.inforural.controller.ManegerAnimalController" >
 				Sexo:<combobox mold="rounded" readonly="true" id="comboGenero" width="420px"  model="@{win$composer.listGenero }" 
 					selectedItem="@{win$composer.currentAnimal.sexo, load-after='novo.onClick,box.onSelect,cancelar.onClick'}">
 					<comboitem self="@{each='genero'}" value="@{genero}" label="@{genero.descricao}"/>
+				</combobox >
+			</row>
+			<row>
+				Espécie:<combobox mold="rounded" readonly="true" id="comboEspecie" width="420px"  model="@{win$composer.listTipoAnimal }" 
+					selectedItem="@{win$composer.currentAnimal.tipoAnimal, load-after='novo.onClick,box.onSelect,cancelar.onClick'}">
+					<comboitem self="@{each='especie'}" value="@{especie}" label="@{especie.nome}"/>
 				</combobox >
 			</row>
 			<row>

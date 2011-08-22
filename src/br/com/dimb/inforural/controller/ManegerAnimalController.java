@@ -14,11 +14,13 @@ import br.com.dimb.inforural.business.Animal;
 import br.com.dimb.inforural.business.Cor;
 import br.com.dimb.inforural.business.Genero;
 import br.com.dimb.inforural.business.Situacao;
+import br.com.dimb.inforural.business.TipoAnimal;
 import br.com.dimb.inforural.services.AnimalService;
 import br.com.dimb.inforural.services.CorService;
 import br.com.dimb.inforural.services.GeneroService;
 import br.com.dimb.inforural.services.IBaseService;
 import br.com.dimb.inforural.services.SituacaoService;
+import br.com.dimb.inforural.services.TipoAnimalService;
 
 public class ManegerAnimalController extends ManegerBase {
 	
@@ -32,18 +34,17 @@ public class ManegerAnimalController extends ManegerBase {
 	private Button novo;
 	private Paging paging;
 	private Listbox box;
-	private Combobox comboGenero;
-	private Combobox comboSituacao;
-	private Combobox comboCor;
 	
 	private AnimalService animalService;
 	private CorService corService;
 	private SituacaoService situacaoService;
 	private GeneroService generoService;
+	private TipoAnimalService tipoAnimalService;
 	private List<Animal> listAnimal= new ArrayList<Animal>();
 	private List<Cor> listCor;
 	private List<Situacao> listSituacao;
 	private List<Genero>   listGenero;
+	private List<TipoAnimal> listTipoAnimal;
 	private Animal currentAnimal;
 	
 	public void doAfterCompose(Component comp) throws Exception{
@@ -56,6 +57,7 @@ public class ManegerAnimalController extends ManegerBase {
 		this.listCor=corService.findAll();
 		this.listGenero=this.generoService.findAll();
 		this.listSituacao=this.situacaoService.findAll();
+		this.listTipoAnimal=this.tipoAnimalService.findAll();
 	}
 	
 	public void onClick$salvar() {
@@ -221,6 +223,20 @@ public class ManegerAnimalController extends ManegerBase {
 
 	public Animal getCurrentAnimal() {
 		return currentAnimal;
+	}
+
+	@Autowired
+	public void setTipoAnimalService(TipoAnimalService tipoAnimalService) {
+		this.tipoAnimalService = tipoAnimalService;
+	}
+
+
+	public void setListTipoAnimal(List<TipoAnimal> listTipoAnimal) {
+		this.listTipoAnimal = listTipoAnimal;
+	}
+
+	public List<TipoAnimal> getListTipoAnimal() {
+		return listTipoAnimal;
 	}
 
 }
